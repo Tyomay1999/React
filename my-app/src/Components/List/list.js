@@ -21,34 +21,38 @@ class List extends Component {
 
         fetch(`${API_URL}/cryptocurrencies/?page=1&perPage=10`)
         .then( resp => {
-                return resp.json().then((data) => {
-                    if (resp.ok) {
-                        return data
-                    }else {
-                        return Promise.reject(resp.statusText)
-                    }
+            return resp.json().then((data) => {
+                if (resp.ok) {
+                    return data
+                }
+                return Promise.reject(data)
                 })
         })
-        .then((data) => {
+        .then(data => {
+        console.log("List -> componentDidMount -> data", data)
+            
             const {currencies} = data;
             this.setState({
                 loading: false,
                 currencies
             })}
         )
-        .catch( error => {
-        this.setState({
-                loading: true,
-                error
+        .catch( (error) => {
+            this.setState({
+                loading: false,
+                error: error.errorMessage
+                })
             })
-        })
-    }
+        }
 
     render() {
         const {currencies, loading, error} = this.state;
         if(error){
-            return <p className="Error">Error {`${error}`}</p>
-        }else if (loading){
+            return (
+                <div className="error">{error}</div>
+            )
+        } 
+        if (loading){
             return(
                 <div className="loading-contanier">
                     <Loading/>
