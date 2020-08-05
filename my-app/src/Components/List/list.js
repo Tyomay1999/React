@@ -10,7 +10,7 @@ class List extends Component {
         this.state = {
             currencies: [],
             loading: false,
-            error: null
+            error: ''
         };
     };
 
@@ -19,9 +19,13 @@ class List extends Component {
             loading: true
         })
 
-        fetch(`${API_URL}/cryptocurrencies/?page=1&perPage=10`)
-        .then( resp => {
-            return resp.json()
+        fetch(`${API_URL}cryptocurrencies/?page=1&perPage=10`)
+        .then( ( res, rej) => {
+            if (res.ok) {
+                return res.json()
+            } else {
+                return  rej
+            }
         })
         .then(
             (data) => {
@@ -29,14 +33,20 @@ class List extends Component {
             this.setState({
                 loading: false,
                 currencies
-            })},
-            (error) => {
-                this.setState({
-                    loading: true,
-                    error
-                })
-            }
+            })}
+            // (error) => {
+            //     this.setState({
+            //         loading: true,
+            //         error
+            //     })
+            // }
         )
+        .catch(rej => {
+        this.setState({
+                loading: true,
+                error: rej
+            })
+        })
     }
 
     render() {
