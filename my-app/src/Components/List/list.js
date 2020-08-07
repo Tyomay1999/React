@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {API_URL} from '../../config';
 import Loading from '../Common/Loading/loading';
 import Table from './table';
+import Pagination from './pagination';
 import './table.css';
 
 class List extends Component {
@@ -61,7 +62,12 @@ class List extends Component {
         }
         return(
             <div >
-                <Table data={currencies} />
+                <Table
+                    data={currencies} 
+                 />
+                <Pagination
+                    
+                />
             </div>
         )
     };
