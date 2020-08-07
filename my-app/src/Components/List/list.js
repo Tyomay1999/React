@@ -11,16 +11,21 @@ class List extends Component {
         this.state = {
             currencies: [],
             loading: false,
+            page: 1,
+            totalPages: 0,
+            perPage: 20,
             error: ''
         };
+        this.handlePaginationClick = this.handlePaginationClick.bind(this);
     };
 
-    componentDidMount(){
+    fetchCurencis() {
         this.setState({
             loading: true
         })
+        const { page, perPage } = this.state
 
-        fetch(`${API_URL}/cryptocurrencies/?page=1&perPage=10`)
+        fetch(`${API_URL}/cryptocurrencies/?page=${page}&perPage=${perPage}`)
         .then( resp => {
             return resp.json().then((data) => {
                 if (resp.ok) {
@@ -30,12 +35,11 @@ class List extends Component {
                 })
         })
         .then(data => {
-        console.log("List -> componentDidMount -> data", data)
-            
-            const {currencies} = data;
+            const {currencies, totalPages} = data;
             this.setState({
                 loading: false,
-                currencies
+                currencies,
+                totalPages
             })}
         )
         .catch( (error) => {
@@ -44,10 +48,24 @@ class List extends Component {
                 error: error.errorMessage
                 })
             })
-        }
+    }
+
+    componentDidMount(){
+        this.fetchCurencis();
+    }
+
+    handlePaginationClick (direction) {
+        let nextPage = this.state.page;
+        nextPage = direction === 'next' ? nextPage + 1 : nextPage - 1;
+        console.log("List -> handlePaginationClick -> nextPage", nextPage);
+        this.setState({
+            page: nextPage
+        })
+        this.fetchCurencis()
+    }
 
     render() {
-        const {currencies, loading, error} = this.state;
+        const {currencies, loading, error, page, totalPages} = this.state;
         if(error){
             return (
                 <div className="error">{error}</div>
@@ -66,7 +84,9 @@ class List extends Component {
                     data={currencies} 
                  />
                 <Pagination
-                    
+                    page={page}
+                    totalPages={totalPages}
+                    handlePaginationClick={this.handlePaginationClick}
                 />
             </div>
         )
