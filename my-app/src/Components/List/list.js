@@ -57,11 +57,9 @@ class List extends Component {
     handlePaginationClick (direction) {
         let nextPage = this.state.page;
         nextPage = direction === 'next' ? nextPage + 1 : nextPage - 1;
-        console.log("List -> handlePaginationClick -> nextPage", nextPage);
         this.setState({
             page: nextPage
-        })
-        this.fetchCurencis()
+        }, this.fetchCurencis)
     }
 
     render() {
