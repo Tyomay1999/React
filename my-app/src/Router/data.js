@@ -1,4 +1,4 @@
-export const data = [
+const data = [
     {
         carName: 'Mersedes',
         model: 'GLE',
@@ -20,3 +20,25 @@ export const data = [
         id: 'nissan'
     }
 ]
+const moto = [
+    {
+        carName: 'Suzuki',
+        model: 'Hayabusa',
+        id: 'suzuki'
+    },
+    {
+        carName: 'Yamaha',
+        model: 'R1',
+        id: 'yamaha'
+    },
+    {
+        carName: 'Kawasaki',
+        model: 'KXF250',
+        id: 'kawasaki'
+    }
+]
+export {
+    data,
+    moto
+}
+

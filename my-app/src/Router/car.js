@@ -1,18 +1,21 @@
 import React from 'react';
-import {data} from './data';
+import { Link } from 'react-router-dom';
+import { data } from './data';
 
 const Car = () => {
-    return(
+    return (
         <>
             <h1>Car</h1>
             <ul>
                 {
-                    data.map(({id, carName, model}) => {
-                        return(
+                    data.map(({ id, carName, model }) => {
+                        return (
                             <li key={id}>
-                                <a href={`/car/${id}`}>
+                                <Link
+                                    to={`/car/${id}`}
+                                >
                                     {carName} : {model}
-                                </a>
+                                </Link>
                             </li>
                         )
                     })
