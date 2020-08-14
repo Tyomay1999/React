@@ -11,7 +11,7 @@ const App = () => {
             <BrowserRouter>
                 <Header />
                 <Route path='/' exact component={List} />
-                <Route path='/currensy/:id' component={Detail} />
+                <Route path='/currency/:id' component={Detail} />
             </BrowserRouter>
         </>
     )

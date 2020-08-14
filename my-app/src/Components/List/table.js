@@ -1,9 +1,8 @@
 import React from 'react';
 import { renderChangePercent } from '../../helpers';
-import { Link } from 'react-router-dom';
 import './table.css';
 
-const Table = (props) => {
+const Table = ({ data, historyPush }) => {
     return (
         <div className="Table-container">
             <table className="Table">
@@ -17,7 +16,7 @@ const Table = (props) => {
                 </thead>
                 <tbody className="Table-body">
                     {
-                        props.data.map(({
+                        data.map(({
                             id,
                             rank,
                             name,
@@ -26,12 +25,10 @@ const Table = (props) => {
                             percentChange24h
                         }) => {
                             return (
-                                <tr key={id}>
+                                <tr key={id} onClick={() => historyPush(`/currency/${id}`)}>
                                     <td>
-                                        <Link to={`/currensy/${id}`}>
-                                            <span className="Table-rank">{rank}</span>
-                                            {name}
-                                        </Link>
+                                        <span className="Table-rank">{rank}</span>
+                                        {name}
                                     </td>
                                     <td>
                                         <span className="Table-dollar">$</span>

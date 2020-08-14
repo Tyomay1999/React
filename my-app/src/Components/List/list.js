@@ -62,7 +62,6 @@ class List extends Component {
             page: nextPage
         }, this.fetchCurencis)
     }
-
     render() {
         const { currencies, loading, error, page, totalPages } = this.state;
         if (error) {
@@ -77,10 +76,14 @@ class List extends Component {
                 </div>
             )
         }
+        // console.log(this.props , 'This.props');
+        // console.log(this.props.history.push , 'This.props');
+
         return (
             <div >
                 <Table
                     data={currencies}
+                    historyPush={this.props.history.push}
                 />
                 <Pagination
                     page={page}
