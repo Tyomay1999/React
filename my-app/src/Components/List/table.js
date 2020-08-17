@@ -1,8 +1,12 @@
 import React from 'react';
 import { renderChangePercent } from '../../helpers';
+import { whithRouter } from 'react-router-dom';
+import myHOC from '../HOC/index';
+
 import './table.css';
 
-const Table = ({ data, historyPush }) => {
+const Table = ({ data, ...props }) => {
+    console.log("Table -> props", props)
     return (
         <div className="Table-container">
             <table className="Table">
@@ -25,7 +29,7 @@ const Table = ({ data, historyPush }) => {
                             percentChange24h
                         }) => {
                             return (
-                                <tr key={id} onClick={() => historyPush(`/currency/${id}`)}>
+                                <tr key={id} onClick={() => {}}>
                                     <td>
                                         <span className="Table-rank">{rank}</span>
                                         {name}
@@ -50,4 +54,4 @@ const Table = ({ data, historyPush }) => {
         </div>
     )
 }
-export default Table;
+export default myHOC(Table);

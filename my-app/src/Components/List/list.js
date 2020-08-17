@@ -83,7 +83,6 @@ class List extends Component {
             <div >
                 <Table
                     data={currencies}
-                    historyPush={this.props.history.push}
                 />
                 <Pagination
                     page={page}
