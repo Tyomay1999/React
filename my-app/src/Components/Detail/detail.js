@@ -13,6 +13,7 @@ class Detail extends React.Component {
             error: null
         }
     }
+
     componentDidMount() {
         const currencyId = this.props.match.params.id;
         this.setState({
@@ -84,7 +85,7 @@ class Detail extends React.Component {
                         {currency.totalSupply}
                     </div>
                 </div>
-                
+
             </div>
         )
     }
