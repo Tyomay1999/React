@@ -13,9 +13,7 @@ class Detail extends React.Component {
             error: null
         }
     }
-
-    componentDidMount() {
-        const currencyId = this.props.match.params.id;
+    fetchCurrency(currencyId){
         this.setState({
             loading: true
         })
@@ -33,6 +31,14 @@ class Detail extends React.Component {
                     error: error.errorMessage
                 })
             })
+    }
+    componentDidMount() {
+        const currencyId = this.props.match.params.id;
+        this.fetchCurrency(currencyId)
+    }
+    componentWillReceiveProps(nextProp){
+        const currencyId = nextProp.match.params.id;
+        this.fetchCurrency(currencyId)
     }
     render() {
         const { loading, currency, error } = this.state;
